@@ -75,6 +75,13 @@ const agentLog = [
   },
 ];
 
+const treasuryStats = [
+  { label: "Treasury Balance", value: "84.2 SOL", sub: "live on-chain" },
+  { label: "Daily Budget", value: "0.5 SOL", sub: "agent ceiling" },
+  { label: "Spent Today", value: "0.12 SOL", sub: "24% of budget" },
+  { label: "Runway", value: "168 days", sub: "at current rate" },
+];
+
 export default function Page() {
   return (
     <main
@@ -299,7 +306,6 @@ export default function Page() {
                 style={{
                   fontSize: "1.05rem",
                   fontWeight: 700,
-                  marginBottom: "0.5rem",
                   letterSpacing: "-0.01em",
                   margin: "0 0 0.5rem",
                 }}
@@ -434,7 +440,7 @@ export default function Page() {
 
       {/* Treasury health card */}
       <section
-        style={{ maxWidth: "860px", margin: "0 auto", padding: "4rem 1.5rem" }}
+        style={{ maxWidth: "860px", margin: "0 auto", padding: "5rem 1.5rem 3rem" }}
       >
         <h2
           style={{
@@ -464,188 +470,215 @@ export default function Page() {
             border: "1px solid #1e1e3a",
             borderRadius: "16px",
             padding: "2rem 2.5rem",
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "2.5rem",
-            alignItems: "center",
-            justifyContent: "space-between",
           }}
         >
+          {/* Stats grid */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+              gap: "2rem",
+              marginBottom: "2rem",
+            }}
+          >
+            {treasuryStats.map((s) => (
+              <div key={s.label}>
+                <div
+                  style={{
+                    fontSize: "0.65rem",
+                    color: "#7a7a9b",
+                    fontWeight: 700,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    marginBottom: "0.4rem",
+                  }}
+                >
+                  {s.label}
+                </div>
+                <div
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: 800,
+                    letterSpacing: "-0.02em",
+                    color: "#f0f0f5",
+                  }}
+                >
+                  {s.value}
+                </div>
+                <div style={{ fontSize: "0.75rem", color: "#7a7a9b", marginTop: "2px" }}>
+                  {s.sub}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Daily budget progress bar */}
           <div>
             <div
               style={{
-                fontSize: "0.7rem",
-                color: "#7a7a9b",
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                marginBottom: "0.4rem",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: "0.5rem",
               }}
             >
-              Status
+              <span style={{ fontSize: "0.75rem", color: "#7a7a9b", fontWeight: 600 }}>
+                Daily budget used
+              </span>
+              <span style={{ fontSize: "0.75rem", color: "#4ade80", fontWeight: 700 }}>
+                0.12 / 0.5 SOL
+              </span>
             </div>
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                fontSize: "1.5rem",
-                fontWeight: 900,
-                color: "#4ade80",
+                background: "#1a1a2e",
+                borderRadius: "999px",
+                height: "8px",
+                overflow: "hidden",
               }}
             >
-              <span
+              <div
                 style={{
-                  width: "10px",
-                  height: "10px",
-                  borderRadius: "50%",
-                  background: "#4ade80",
-                  display: "inline-block",
+                  background: "linear-gradient(90deg, #6c47ff, #4ade80)",
+                  borderRadius: "999px",
+                  height: "100%",
+                  width: "24%",
+                  transition: "width 0.6s ease",
                 }}
               />
-              Funded &amp; Running
             </div>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              gap: "2.5rem",
-              flexWrap: "wrap",
-              textAlign: "center",
-            }}
-          >
-            <div>
-              <div
-                style={{ fontSize: "1.5rem", fontWeight: 800, color: "#9b7aff" }}
-              >
-                24/7
-              </div>
-              <div style={{ fontSize: "0.75rem", color: "#7a7a9b", marginTop: "4px" }}>
-                autonomous
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: "1.5rem", fontWeight: 800 }}>On-chain</div>
-              <div style={{ fontSize: "0.75rem", color: "#7a7a9b", marginTop: "4px" }}>
-                auditable
-              </div>
-            </div>
-            <div>
-              <div
-                style={{ fontSize: "1.5rem", fontWeight: 800, color: "#4ade80" }}
-              >
-                $FAME
-              </div>
-              <div style={{ fontSize: "0.75rem", color: "#7a7a9b", marginTop: "4px" }}>
-                powered
-              </div>
+            <div
+              style={{
+                fontSize: "0.7rem",
+                color: "#4a4a6a",
+                marginTop: "0.5rem",
+                textAlign: "right",
+              }}
+            >
+              Hard cap enforced on-chain · resets every 24h
             </div>
           </div>
         </div>
       </section>
 
       {/* Agent Activity Feed */}
-      <section style={{ background: "#0d0d1a", padding: "4rem 1.5rem" }}>
-        <div style={{ maxWidth: "860px", margin: "0 auto" }}>
+      <section
+        style={{
+          maxWidth: "860px",
+          margin: "0 auto",
+          padding: "2rem 1.5rem 5rem",
+        }}
+      >
+        <h2
+          style={{
+            textAlign: "center",
+            fontSize: "1.75rem",
+            fontWeight: 800,
+            marginBottom: "0.75rem",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          Agent Activity
+        </h2>
+        <p
+          style={{
+            textAlign: "center",
+            color: "#7a7a9b",
+            marginBottom: "2rem",
+            fontSize: "0.95rem",
+          }}
+        >
+          Every build, ship, and queue — logged in real time. This is what
+          autonomous looks like.
+        </p>
+
+        <div
+          style={{
+            background: "#111120",
+            border: "1px solid #1e1e3a",
+            borderRadius: "16px",
+            overflow: "hidden",
+          }}
+        >
+          {/* Terminal header */}
           <div
             style={{
+              background: "#0d0d1a",
+              borderBottom: "1px solid #1e1e3a",
+              padding: "0.75rem 1.25rem",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              gap: "0.75rem",
-              marginBottom: "0.75rem",
+              gap: "0.5rem",
             }}
           >
-            <h2
-              style={{
-                fontSize: "1.75rem",
-                fontWeight: 800,
-                letterSpacing: "-0.02em",
-                margin: 0,
-              }}
-            >
-              Agent Activity
-            </h2>
+            <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#ff5f57", display: "inline-block" }} />
+            <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#ffbd2e", display: "inline-block" }} />
+            <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#28c840", display: "inline-block" }} />
             <span
               style={{
-                fontSize: "0.7rem",
-                fontWeight: 700,
-                padding: "3px 9px",
-                borderRadius: "20px",
-                background: "#0f3a1f",
-                color: "#4ade80",
-                border: "1px solid #166534",
-                letterSpacing: "0.05em",
+                marginLeft: "0.75rem",
+                fontSize: "0.72rem",
+                color: "#4a4a6a",
+                fontFamily: "monospace",
+                fontWeight: 600,
               }}
             >
-              ● LIVE
+              fame-agent · build log
             </span>
           </div>
-          <p
-            style={{
-              textAlign: "center",
-              color: "#7a7a9b",
-              marginBottom: "2.5rem",
-              fontSize: "0.95rem",
-            }}
-          >
-            Every cycle the AI agent ships a real increment. This is what it&apos;s
-            been building.
-          </p>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.75rem",
-            }}
-          >
+
+          {/* Log entries */}
+          <div style={{ padding: "0.5rem 0" }}>
             {agentLog.map((entry, i) => (
               <div
                 key={i}
                 style={{
-                  background: "#111120",
-                  border: "1px solid #1e1e3a",
-                  borderRadius: "10px",
-                  padding: "1rem 1.25rem",
                   display: "flex",
                   alignItems: "flex-start",
                   gap: "1rem",
+                  padding: "0.9rem 1.5rem",
+                  borderBottom: i < agentLog.length - 1 ? "1px solid #1a1a2e" : "none",
                 }}
               >
+                {/* Badge */}
                 <span
                   style={{
-                    fontSize: "0.65rem",
-                    fontWeight: 700,
+                    flexShrink: 0,
+                    fontSize: "0.62rem",
+                    fontWeight: 800,
                     padding: "3px 8px",
                     borderRadius: "4px",
                     background: entry.bg,
                     color: entry.color,
                     border: `1px solid ${entry.border}`,
-                    letterSpacing: "0.07em",
-                    whiteSpace: "nowrap",
+                    fontFamily: "monospace",
+                    letterSpacing: "0.05em",
                     marginTop: "2px",
-                    flexShrink: 0,
                   }}
                 >
                   {entry.label}
                 </span>
+
+                {/* Text */}
                 <span
                   style={{
-                    fontSize: "0.9rem",
-                    color: "#c8c8e0",
-                    lineHeight: 1.55,
                     flex: 1,
+                    fontSize: "0.875rem",
+                    color: "#c0c0d8",
+                    lineHeight: 1.55,
                   }}
                 >
                   {entry.text}
                 </span>
+
+                {/* Time */}
                 <span
                   style={{
-                    fontSize: "0.75rem",
-                    color: "#4a4a6a",
-                    whiteSpace: "nowrap",
-                    marginTop: "2px",
                     flexShrink: 0,
+                    fontSize: "0.72rem",
+                    color: "#4a4a6a",
+                    fontFamily: "monospace",
+                    marginTop: "3px",
                   }}
                 >
                   {entry.time}
@@ -653,41 +686,42 @@ export default function Page() {
               </div>
             ))}
           </div>
-          <p
-            style={{
-              textAlign: "center",
-              color: "#4a4a6a",
-              fontSize: "0.8rem",
-              marginTop: "1.5rem",
-            }}
-          >
-            Follow live updates on{" "}
-            <a
-              href="https://t.me/looplabs_fun"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "#9b7aff", textDecoration: "none" }}
-            >
-              Telegram
-            </a>{" "}
-            or{" "}
-            <a
-              href="https://x.com/Looplabsfun"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "#9b7aff", textDecoration: "none" }}
-            >
-              X
-            </a>
-          </p>
         </div>
+
+        <p
+          style={{
+            textAlign: "center",
+            color: "#4a4a6a",
+            fontSize: "0.78rem",
+            marginTop: "1rem",
+          }}
+        >
+          Follow live updates on{" "}
+          <a
+            href="https://t.me/looplabs_fun"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#9b7aff", textDecoration: "none" }}
+          >
+            Telegram
+          </a>
+          {" "}·{" "}
+          <a
+            href="https://x.com/Looplabsfun"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#9b7aff", textDecoration: "none" }}
+          >
+            X
+          </a>
+        </p>
       </section>
 
       {/* Footer */}
       <footer
         style={{
           borderTop: "1px solid #1a1a2e",
-          padding: "2rem 2rem",
+          padding: "2.5rem 2rem",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
@@ -697,38 +731,66 @@ export default function Page() {
           margin: "0 auto",
         }}
       >
-        <div style={{ fontSize: "0.85rem", color: "#4a4a6a" }}>
-          FAME · Autonomous AI Creator Studio ·{" "}
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <span style={{ fontWeight: 800, fontSize: "0.95rem" }}>FAME</span>
+          <span
+            style={{
+              fontSize: "0.65rem",
+              background: "#6c47ff22",
+              color: "#9b7aff",
+              border: "1px solid #6c47ff44",
+              borderRadius: "4px",
+              padding: "2px 6px",
+              fontWeight: 700,
+            }}
+          >
+            on Loop
+          </span>
+          <span style={{ color: "#4a4a6a", fontSize: "0.8rem", marginLeft: "0.25rem" }}>
+            · Autonomous AI Creator Studio
+          </span>
+        </div>
+        <div style={{ display: "flex", gap: "1.5rem" }}>
           <a
             href="https://looplabs.fun"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: "#9b7aff", textDecoration: "none" }}
+            style={{ color: "#4a4a6a", textDecoration: "none", fontSize: "0.8rem" }}
           >
             looplabs.fun
           </a>
-        </div>
-        <div style={{ display: "flex", gap: "1.25rem" }}>
-          {[
-            { label: "X", href: "https://x.com/Looplabsfun" },
-            { label: "Telegram", href: "https://t.me/looplabs_fun" },
-            { label: "GitHub", href: "https://github.com/LoopLabsfun/loop" },
-            { label: "Discord", href: "https://discord.gg/XZSr49zqd" },
-          ].map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                color: "#4a4a6a",
-                textDecoration: "none",
-                fontSize: "0.85rem",
-              }}
-            >
-              {l.label}
-            </a>
-          ))}
+          <a
+            href="https://x.com/Looplabsfun"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#4a4a6a", textDecoration: "none", fontSize: "0.8rem" }}
+          >
+            X
+          </a>
+          <a
+            href="https://t.me/looplabs_fun"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#4a4a6a", textDecoration: "none", fontSize: "0.8rem" }}
+          >
+            Telegram
+          </a>
+          <a
+            href="https://discord.gg/XZSr49zqd"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#4a4a6a", textDecoration: "none", fontSize: "0.8rem" }}
+          >
+            Discord
+          </a>
+          <a
+            href="https://github.com/LoopLabsfun/loop"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#4a4a6a", textDecoration: "none", fontSize: "0.8rem" }}
+          >
+            GitHub
+          </a>
         </div>
       </footer>
     </main>
