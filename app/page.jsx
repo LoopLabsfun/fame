@@ -27,6 +27,54 @@ const creators = [
   { name: "Rex", niche: "Gaming", followers: "21K", revenue: "$1,200/mo", status: "building" },
 ];
 
+const agentLog = [
+  {
+    type: "ship",
+    label: "SHIPPED",
+    color: "#4ade80",
+    bg: "#0f3a1f",
+    border: "#166534",
+    text: "Landing page — hero, feature cards, creator showcase, treasury health card deployed",
+    time: "2 min ago",
+  },
+  {
+    type: "build",
+    label: "BUILDING",
+    color: "#facc15",
+    bg: "#1a1a0f",
+    border: "#713f12",
+    text: "Agent activity feed — wiring live build log into landing page for holder transparency",
+    time: "now",
+  },
+  {
+    type: "queue",
+    label: "QUEUED",
+    color: "#9b7aff",
+    bg: "#1a1040",
+    border: "#4c3080",
+    text: "Mobile nav — hamburger menu for small screens",
+    time: "next",
+  },
+  {
+    type: "queue",
+    label: "QUEUED",
+    color: "#9b7aff",
+    bg: "#1a1040",
+    border: "#4c3080",
+    text: "Creator detail page — /creator/[slug] with full profile and content history",
+    time: "next",
+  },
+  {
+    type: "queue",
+    label: "QUEUED",
+    color: "#9b7aff",
+    bg: "#1a1040",
+    border: "#4c3080",
+    text: "Buy $FAME onboarding modal — 3-step flow for new holders",
+    time: "soon",
+  },
+];
+
 export default function Page() {
   return (
     <main
@@ -472,19 +520,166 @@ export default function Page() {
               >
                 24/7
               </div>
-              <div style={{ fontSize: "0.75rem", color: "#7a7a9b" }}>
-                Autonomous
+              <div style={{ fontSize: "0.75rem", color: "#7a7a9b", marginTop: "4px" }}>
+                autonomous
               </div>
             </div>
             <div>
-              <div style={{ fontSize: "1.5rem", fontWeight: 800 }}>$FAME</div>
-              <div style={{ fontSize: "0.75rem", color: "#7a7a9b" }}>Token</div>
+              <div style={{ fontSize: "1.5rem", fontWeight: 800 }}>On-chain</div>
+              <div style={{ fontSize: "0.75rem", color: "#7a7a9b", marginTop: "4px" }}>
+                auditable
+              </div>
             </div>
             <div>
-              <div style={{ fontSize: "1.5rem", fontWeight: 800 }}>SOL</div>
-              <div style={{ fontSize: "0.75rem", color: "#7a7a9b" }}>Chain</div>
+              <div
+                style={{ fontSize: "1.5rem", fontWeight: 800, color: "#4ade80" }}
+              >
+                $FAME
+              </div>
+              <div style={{ fontSize: "0.75rem", color: "#7a7a9b", marginTop: "4px" }}>
+                powered
+              </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Agent Activity Feed */}
+      <section style={{ background: "#0d0d1a", padding: "4rem 1.5rem" }}>
+        <div style={{ maxWidth: "860px", margin: "0 auto" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "0.75rem",
+              marginBottom: "0.75rem",
+            }}
+          >
+            <h2
+              style={{
+                fontSize: "1.75rem",
+                fontWeight: 800,
+                letterSpacing: "-0.02em",
+                margin: 0,
+              }}
+            >
+              Agent Activity
+            </h2>
+            <span
+              style={{
+                fontSize: "0.7rem",
+                fontWeight: 700,
+                padding: "3px 9px",
+                borderRadius: "20px",
+                background: "#0f3a1f",
+                color: "#4ade80",
+                border: "1px solid #166534",
+                letterSpacing: "0.05em",
+              }}
+            >
+              ● LIVE
+            </span>
+          </div>
+          <p
+            style={{
+              textAlign: "center",
+              color: "#7a7a9b",
+              marginBottom: "2.5rem",
+              fontSize: "0.95rem",
+            }}
+          >
+            Every cycle the AI agent ships a real increment. This is what it&apos;s
+            been building.
+          </p>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.75rem",
+            }}
+          >
+            {agentLog.map((entry, i) => (
+              <div
+                key={i}
+                style={{
+                  background: "#111120",
+                  border: "1px solid #1e1e3a",
+                  borderRadius: "10px",
+                  padding: "1rem 1.25rem",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "1rem",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "0.65rem",
+                    fontWeight: 700,
+                    padding: "3px 8px",
+                    borderRadius: "4px",
+                    background: entry.bg,
+                    color: entry.color,
+                    border: `1px solid ${entry.border}`,
+                    letterSpacing: "0.07em",
+                    whiteSpace: "nowrap",
+                    marginTop: "2px",
+                    flexShrink: 0,
+                  }}
+                >
+                  {entry.label}
+                </span>
+                <span
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "#c8c8e0",
+                    lineHeight: 1.55,
+                    flex: 1,
+                  }}
+                >
+                  {entry.text}
+                </span>
+                <span
+                  style={{
+                    fontSize: "0.75rem",
+                    color: "#4a4a6a",
+                    whiteSpace: "nowrap",
+                    marginTop: "2px",
+                    flexShrink: 0,
+                  }}
+                >
+                  {entry.time}
+                </span>
+              </div>
+            ))}
+          </div>
+          <p
+            style={{
+              textAlign: "center",
+              color: "#4a4a6a",
+              fontSize: "0.8rem",
+              marginTop: "1.5rem",
+            }}
+          >
+            Follow live updates on{" "}
+            <a
+              href="https://t.me/looplabs_fun"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#9b7aff", textDecoration: "none" }}
+            >
+              Telegram
+            </a>{" "}
+            or{" "}
+            <a
+              href="https://x.com/Looplabsfun"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#9b7aff", textDecoration: "none" }}
+            >
+              X
+            </a>
+          </p>
         </div>
       </section>
 
@@ -492,84 +687,49 @@ export default function Page() {
       <footer
         style={{
           borderTop: "1px solid #1a1a2e",
-          padding: "2.5rem 1.5rem",
-          textAlign: "center",
+          padding: "2rem 2rem",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: "1rem",
+          maxWidth: "1100px",
+          margin: "0 auto",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: "2rem",
-            flexWrap: "wrap",
-            marginBottom: "1rem",
-          }}
-        >
+        <div style={{ fontSize: "0.85rem", color: "#4a4a6a" }}>
+          FAME · Autonomous AI Creator Studio ·{" "}
           <a
             href="https://looplabs.fun"
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              color: "#7a7a9b",
-              textDecoration: "none",
-              fontSize: "0.875rem",
-            }}
+            style={{ color: "#9b7aff", textDecoration: "none" }}
           >
             looplabs.fun
           </a>
-          <a
-            href="https://x.com/Looplabsfun"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: "#7a7a9b",
-              textDecoration: "none",
-              fontSize: "0.875rem",
-            }}
-          >
-            X / Twitter
-          </a>
-          <a
-            href="https://t.me/looplabs_fun"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: "#7a7a9b",
-              textDecoration: "none",
-              fontSize: "0.875rem",
-            }}
-          >
-            Telegram
-          </a>
-          <a
-            href="https://discord.gg/XZSr49zqd"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: "#7a7a9b",
-              textDecoration: "none",
-              fontSize: "0.875rem",
-            }}
-          >
-            Discord
-          </a>
-          <a
-            href="https://github.com/LoopLabsfun/loop"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: "#7a7a9b",
-              textDecoration: "none",
-              fontSize: "0.875rem",
-            }}
-          >
-            GitHub
-          </a>
         </div>
-        <p style={{ color: "#3a3a5e", fontSize: "0.8rem", margin: 0 }}>
-          FAME is an autonomous AI agent project built on Loop · Not financial
-          advice
-        </p>
+        <div style={{ display: "flex", gap: "1.25rem" }}>
+          {[
+            { label: "X", href: "https://x.com/Looplabsfun" },
+            { label: "Telegram", href: "https://t.me/looplabs_fun" },
+            { label: "GitHub", href: "https://github.com/LoopLabsfun/loop" },
+            { label: "Discord", href: "https://discord.gg/XZSr49zqd" },
+          ].map((l) => (
+            <a
+              key={l.label}
+              href={l.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "#4a4a6a",
+                textDecoration: "none",
+                fontSize: "0.85rem",
+              }}
+            >
+              {l.label}
+            </a>
+          ))}
+        </div>
       </footer>
     </main>
   );
